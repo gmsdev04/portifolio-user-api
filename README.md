@@ -1,1 +1,0 @@
-# meli-user-api
