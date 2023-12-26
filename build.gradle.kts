@@ -16,9 +16,7 @@ java {
 }
 
 configurations {
-	compileOnly {
-		extendsFrom(configurations.annotationProcessor.get())
-	}
+
 }
 
 repositories {
@@ -28,11 +26,16 @@ repositories {
 dependencies {
 	implementation("org.springframework.boot:spring-boot-starter-actuator")
 	implementation("org.springframework.boot:spring-boot-starter-data-jpa")
+	implementation("org.springframework.boot:spring-boot-starter-web")
 	implementation("org.jetbrains.kotlin:kotlin-reflect")
-	compileOnly("org.projectlombok:lombok")
+	compileOnly("org.projectlombok:lombok:1.18.30")
 	runtimeOnly("com.mysql:mysql-connector-j")
-	annotationProcessor("org.projectlombok:lombok")
+	annotationProcessor("org.projectlombok:lombok:1.18.30")
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
+	implementation("br.com.caelum.stella:caelum-stella-core:2.1.6")
+	implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.3.0")
+
+
 }
 
 tasks.withType<KotlinCompile> {

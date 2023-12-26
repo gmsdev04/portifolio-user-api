@@ -1,0 +1,10 @@
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/meli
+    username: ${MELI_DB_USERNAME:root}
+    password: ${MELI_DB_PASSWORD:root}
+
+
+# If you're creating an application in AWS you could use secrets manager to securely store your credentials.
+# In private cloud some vault could be used.
+# Credentials rotation is a good practice

@@ -1,0 +1,18 @@
+version: '3.8'
+
+services:
+  mysql:
+    image: mysql:8.0
+    container_name: mysql-container
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: meli
+      MYSQL_PASSWORD: root
+      TZ: "America/Sao_Paulo"
+    ports:
+      - "3306:3306"
+    volumes:
+      - ./init-scripts:/docker-entrypoint-initdb.d
+
+# I'm configuring timezone "Ameriza/Sao_Paulo" to date default values work as expected.
