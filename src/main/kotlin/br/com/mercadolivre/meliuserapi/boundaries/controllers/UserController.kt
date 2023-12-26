@@ -38,7 +38,7 @@ class UserController(
                 .created(URI.create("/v1/users/users/${userCreated.id}"))
                 .body(UserResponseDto(userCreated))
 
-        }catch (e : UserException){
+        }catch (e : IllegalArgumentException){
             ResponseEntity.unprocessableEntity().body(ErrorResponse(e.message))
         }catch (e : Exception) {
             ResponseEntity.internalServerError().body(ErrorResponse())

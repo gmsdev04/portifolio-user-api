@@ -14,12 +14,16 @@ class CreateUserUseCaseImpl(
     private val cpfValidator : CpfValidatorUseCase
 ) : CreateUserUseCase {
 
-    override fun create(newUser: User)= YEARS.between(newUser.dateOfBirth, LocalDate.now())
-        .takeIf { it > 18 }
-        ?.let {
-            newUser.cpf.takeUnless { userRepo.existsByCpf(it) }
-                ?.let { userRepo.create(newUser) }
-                ?: throw UserException("User with the provided CPF already exists")
-        } ?: throw UserException("The user age must be above 18 years")
+    override fun create(newUser: User) : User{
+        val age = YEARS.between(newUser.dateOfBirth, LocalDate.now())
+
+        require(age > 18) { "The user age must be above 18 years" }
+
+        require(cpfValidator.isValid(newUser.cpf)) { "CPF is not valid" }
+
+        require(!userRepo.existsByCpf(newUser.cpf)) { "User with the given CPF already exists" }
+
+        return userRepo.create(newUser)
+    }
 
 }
