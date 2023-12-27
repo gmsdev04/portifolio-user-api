@@ -13,6 +13,7 @@ class UserRepositoryImpl(
     val jpa : UserRepositoryJpa
 ) : UserRepository {
     override fun existsByCpf(cpf: String) = jpa.existsByCpf(cpf)
+    override fun existsByEmail(email: String) = jpa.existsByEmail(email)
 
     override fun create(newUser: User) = jpa.save(UserEntity(newUser)).toDomain()
 
@@ -25,6 +26,7 @@ class UserRepositoryImpl(
                 name = updatedUser.name
                 dateOfBirth = updatedUser.dateOfBirth
                 cpf = updatedUser.cpf
+                email = updatedUser.email
                 updatedAt = LocalDateTime.now()
                 jpa.save(this)
             }.toDomain()

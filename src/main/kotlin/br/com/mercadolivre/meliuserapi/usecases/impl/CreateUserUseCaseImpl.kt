@@ -21,7 +21,10 @@ class CreateUserUseCaseImpl(
 
         require(cpfValidator.isValid(newUser.cpf)) { "CPF is not valid" }
 
-        require(!userRepo.existsByCpf(newUser.cpf)) { "There is another user with the given CPF already exists" }
+        require(!userRepo.existsByCpf(newUser.cpf)) { "User with the given CPF already exists" }
+
+        require(!userRepo.existsByEmail(newUser.email)) { "User with the given EMAIL already exists" }
+
 
         return userRepo.create(newUser)
     }

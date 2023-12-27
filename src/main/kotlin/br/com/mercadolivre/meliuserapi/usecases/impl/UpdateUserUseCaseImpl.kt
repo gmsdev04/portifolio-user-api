@@ -16,22 +16,22 @@ class UpdateUserUseCaseImpl(
 ) : UpdateUserUseCase{
     override fun update(userUpdatedJson: String, id : UUID) : User?{
 
-        return userRepository.getUserById(id)?.let {
+        return userRepository.getUserById(id)?.let { user ->
+            val currentCpf = user.cpf
+            val currentEmail = user.email
 
-            val currentCpf = it.cpf
+            mapper.readerForUpdating(user).readValue(userUpdatedJson, User::class.java)
 
-            val updater = mapper.readerForUpdating(it)
-
-            updater.readValue(userUpdatedJson, User::class.java)
-
-            if(currentCpf != it.cpf){
-                require(cpfValidator.isValid(it.cpf)) { "CPF is not valid" }
-
-                require(!userRepository.existsByCpf(it.cpf)) {"User with the given CPF already exists"}
+            if (currentCpf != user.cpf) {
+                require(cpfValidator.isValid(user.cpf)) { "CPF is not valid" }
+                require(!userRepository.existsByCpf(user.cpf)) { "Another user with the given CPF already exists" }
             }
 
-            userRepository.update(it)
+            if (currentEmail != user.email) {
+                require(!userRepository.existsByEmail(user.email)) { "Another user with the given EMAIL already exists" }
+            }
 
+            userRepository.update(user)
         }
     }
 }

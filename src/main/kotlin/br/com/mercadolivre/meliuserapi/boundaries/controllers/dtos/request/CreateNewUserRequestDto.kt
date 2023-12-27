@@ -8,7 +8,8 @@ import java.time.LocalDate
 data class CreateNewUserRequestDto(
     var name : String,
     var cpf : String,
+    var email : String,
     var dateOfBirth : LocalDate
 ){
-    fun toDomain() = User(cpf=this.cpf,name=this.name, dateOfBirth = this.dateOfBirth)
+    fun toDomain() = User(cpf=this.cpf,name=this.name, dateOfBirth = this.dateOfBirth, email = this.email)
 }

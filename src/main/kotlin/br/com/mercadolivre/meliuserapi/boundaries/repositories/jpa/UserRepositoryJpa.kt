@@ -12,4 +12,6 @@ interface UserRepositoryJpa : CrudRepository<UserEntity, UUID>{
     fun listByName(name : String) : List<UserEntity>
 
     fun existsByCpf(cpf : String) : Boolean
+
+    fun existsByEmail(email : String) : Boolean
 }

@@ -8,6 +8,6 @@ import java.time.LocalDate
 data class PatchUserRequestDto(
     val name : String?,
     val cpf : String?,
+    val email : String?,
     val dateOfBirth : LocalDate?
-){
-}
+)

@@ -20,6 +20,8 @@ data class UserEntity(
     var name : String,
     @Column(name="cpf")
     var cpf : String,
+    @Column(name="email")
+    var email : String,
     @Column(name="date_of_birth")
     var dateOfBirth : LocalDate,
     @Column(name="created_at")
@@ -27,7 +29,7 @@ data class UserEntity(
     @Column(name="updated_at")
     var updatedAt : LocalDateTime?
 ) {
-    constructor(user : User) : this(user.id, user.name, user.cpf, user.dateOfBirth, user.createdAt, user.updatedAt)
+    constructor(user : User) : this(user.id, user.name, user.cpf, user.email, user.dateOfBirth, user.createdAt, user.updatedAt)
 
-    fun toDomain() = User(id, name, cpf, dateOfBirth, createdAt, updatedAt)
+    fun toDomain() = User(id, name, cpf, email, dateOfBirth, createdAt, updatedAt)
 }

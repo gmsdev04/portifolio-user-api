@@ -6,6 +6,8 @@ import java.util.*
 interface UserRepository {
     fun existsByCpf(cpf: String) : Boolean
 
+    fun existsByEmail(email : String) : Boolean
+
     fun create(newUser : User) : User
 
     fun update(updatedUser : User) : User?
