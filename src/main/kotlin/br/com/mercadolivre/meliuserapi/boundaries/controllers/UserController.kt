@@ -82,7 +82,7 @@ class UserController(
             this.updateUserUseCase.update(dtoJson, id)?.let {
                 ResponseEntity.ok(UserResponseDto(it))
             } ?: ResponseEntity.notFound().build()
-        }catch (e : UserException){
+        }catch (e : IllegalArgumentException){
             ResponseEntity.unprocessableEntity().body(ErrorResponse(e.message))
         }catch (e : Exception) {
             ResponseEntity.internalServerError().body(ErrorResponse())
