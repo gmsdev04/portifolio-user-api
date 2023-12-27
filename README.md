@@ -96,7 +96,7 @@ Dicas:
 ## Minhas observações:
 - Devido ao final do ano e as demandas corridas não consegui cobrir 100% dos testes mas fiz alguns para verem que sei fazer e entendo a importancia.
 - Como nos requisitos não mencionava que era proibido atualizar CPF eu não bloqueie, entendo que em um caso real isso é improvável ser permitido.
-- Como é uma aplicação local para teste utilizei o user/senha, root, root mas entendo que em ambiente produtivo precisamos manter esses dados em algum local seguro como um vault e secrets manager.
+- Como é uma aplicação local para teste utilizei o user/senha, root, root mas entendo que em ambiente produtivo precisamos manter esses dados em algum local seguro como um vault ou secrets manager.
 - Na documentação o requisito diz seguinte "Somente usuários acima de 18 anos serão cadastrados" portanto só será aceito a partir de 19 anos.
 - Na documentação diz "Quando buscar por vários usuários, deve permitir realizar um filtro pelo nome", não tinha certeza se era para passar varios nomes e buscar vários users ou passar um nome e buscar vários users, fiz a segunda opção, mas sei fazer a primeira também.
 - Incluí health check porém no caso não serve pra nada haha, mas acho importante XD
