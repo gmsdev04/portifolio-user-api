@@ -1,7 +1,6 @@
 package br.com.mercadolivre.meliuserapi.usecases.impl
 
 import br.com.mercadolivre.meliuserapi.domains.User
-import br.com.mercadolivre.meliuserapi.exceptions.UserException
 import br.com.mercadolivre.meliuserapi.repositories.UserRepository
 import br.com.mercadolivre.meliuserapi.usecases.CpfValidatorUseCase
 import br.com.mercadolivre.meliuserapi.usecases.CreateUserUseCase

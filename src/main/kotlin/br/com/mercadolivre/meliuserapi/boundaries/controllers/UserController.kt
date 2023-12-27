@@ -4,20 +4,20 @@ import br.com.mercadolivre.meliuserapi.boundaries.controllers.dtos.request.Creat
 import br.com.mercadolivre.meliuserapi.boundaries.controllers.dtos.request.PatchUserRequestDto
 import br.com.mercadolivre.meliuserapi.boundaries.controllers.dtos.response.ErrorResponse
 import br.com.mercadolivre.meliuserapi.boundaries.controllers.dtos.response.UserResponseDto
-import br.com.mercadolivre.meliuserapi.exceptions.UserException
 import br.com.mercadolivre.meliuserapi.usecases.CreateUserUseCase
 import br.com.mercadolivre.meliuserapi.usecases.GetUserByIdUseCase
 import br.com.mercadolivre.meliuserapi.usecases.ListUsersByNameUseCase
 import br.com.mercadolivre.meliuserapi.usecases.UpdateUserUseCase
 import com.fasterxml.jackson.databind.ObjectMapper
 import jakarta.validation.Valid
-import org.springframework.data.jpa.domain.AbstractPersistable_.id
 import org.springframework.http.ResponseEntity
+import org.springframework.validation.annotation.Validated
 import org.springframework.web.bind.annotation.*
 import java.net.URI
 import java.util.*
 
 
+@Validated
 @RestController
 @RequestMapping("/v1/users")
 class UserController(
@@ -29,7 +29,7 @@ class UserController(
 ) {
 
     @PostMapping
-    fun create(dto : CreateNewUserRequestDto) : ResponseEntity<Any> {
+    fun create(@Valid @RequestBody dto : CreateNewUserRequestDto) : ResponseEntity<Any> {
 
         return try {
             val userCreated = this.createUseCase.create(dto.toDomain())
@@ -46,33 +46,29 @@ class UserController(
     }
 
     @GetMapping("/{id}")
-    fun getById(id : UUID) : ResponseEntity<Any>{
+    fun getById(id : UUID) : ResponseEntity<Any> {
         return try {
             getByIdUseCase.get(id)?.let {
                 ResponseEntity.ok(UserResponseDto(it))
             } ?: ResponseEntity.notFound().build()
 
-        }catch (e : UserException){
-            ResponseEntity.unprocessableEntity().body(ErrorResponse(e.message))
         }catch (e : Exception) {
             ResponseEntity.internalServerError().body(ErrorResponse())
         }
     }
 
     @GetMapping
-    fun listByName(@RequestParam name : String) : ResponseEntity<Any>{
+    fun listByName(@RequestParam name : String) : ResponseEntity<Any> {
         return try {
             ResponseEntity.ok(listUsersByNameUseCase.list(name))
-        }catch (e : UserException){
-            ResponseEntity.unprocessableEntity().body(ErrorResponse(e.message))
         }catch (e : Exception) {
             ResponseEntity.internalServerError().body(ErrorResponse())
         }
     }
 
     @PatchMapping("/{id}")
-    fun patchById(@RequestBody dto : PatchUserRequestDto,
-                  @PathVariable id : UUID,) : ResponseEntity<Any>{
+    fun patchById(@Valid @RequestBody dto : PatchUserRequestDto,
+                  @PathVariable id : UUID,) : ResponseEntity<Any> {
 
         return try {
 
