@@ -1,7 +1,7 @@
-# Meli-user-api
+# portifolio-user-api
 ## Descrição
 
-Este projeto visa atender os requisitos solicitados pelo teste do Mercado Livre para atuar como back-end, resumidamente consiste em uma API RestFull em Java/Kotlin com operações de leitura, gravação, atualização e consulta por nome no domínio de usuários.
+Este projeto resumidamente consiste em uma API RestFull em Java/Kotlin com operações de leitura, gravação, atualização e consulta por nome no domínio de usuários.
 
 ## Como executar o projeto
 #### 1 - Configurando o ambiente
@@ -79,8 +79,8 @@ Para facilitar o teste de vocês eu coloquei o Swagger no projeto, basta acessar
 ## Arquitetura macro
 ```mermaid
 graph TD; 
-    Swagger --> Meli-user-api
-    Meli-user-api-->MySQL;
+    Swagger --> portifolio-user-api
+    portifolio-user-api-->MySQL;
 ```
 
 ## Organizações de pacotes e padrões
